@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/QTTT/static/css/main.a434cd40.chunk.css",
-    "main.js": "/QTTT/static/js/main.1d0f6379.chunk.js",
-    "main.js.map": "/QTTT/static/js/main.1d0f6379.chunk.js.map",
+    "main.css": "/QTTT/static/css/main.368d6163.chunk.css",
+    "main.js": "/QTTT/static/js/main.f919d599.chunk.js",
+    "main.js.map": "/QTTT/static/js/main.f919d599.chunk.js.map",
     "runtime~main.js": "/QTTT/static/js/runtime~main.64642d3c.js",
     "runtime~main.js.map": "/QTTT/static/js/runtime~main.64642d3c.js.map",
-    "static/js/2.cf0b3ce0.chunk.js": "/QTTT/static/js/2.cf0b3ce0.chunk.js",
-    "static/js/2.cf0b3ce0.chunk.js.map": "/QTTT/static/js/2.cf0b3ce0.chunk.js.map",
+    "static/js/2.8f3cadfc.chunk.js": "/QTTT/static/js/2.8f3cadfc.chunk.js",
+    "static/js/2.8f3cadfc.chunk.js.map": "/QTTT/static/js/2.8f3cadfc.chunk.js.map",
     "index.html": "/QTTT/index.html",
-    "precache-manifest.f8b2640de120d496e5f8037480b94646.js": "/QTTT/precache-manifest.f8b2640de120d496e5f8037480b94646.js",
+    "precache-manifest.23b2690aa10a955542de3e1ac0de4c42.js": "/QTTT/precache-manifest.23b2690aa10a955542de3e1ac0de4c42.js",
     "service-worker.js": "/QTTT/service-worker.js",
-    "static/css/main.a434cd40.chunk.css.map": "/QTTT/static/css/main.a434cd40.chunk.css.map"
+    "static/css/main.368d6163.chunk.css.map": "/QTTT/static/css/main.368d6163.chunk.css.map"
   }
 }
