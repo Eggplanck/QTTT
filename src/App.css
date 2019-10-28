@@ -35,33 +35,24 @@
     }
 
     .button {
-        background-color: rgb(167, 237, 106);
-        font-size: 3vmin;
         position: fixed;
         top: 50vmin;
         left: 90vmin;
         -webkit-user-select: none;
-        border: solid;
-        border-radius: 10px;
     }
 
     .choice {
         position: fixed;
-        top: 50vmin;
+        top: 30vmin;
         left: 90vmin;
         -webkit-user-select: none;
     }
 
     .marubatsu {
-        width: 9vmin;
-        height: 9vmin;
+        width: 13vmin;
+        height: 13vmin;
         text-align: center;
         line-height: 9vmin;
-        padding: 0;
-        font-size: 5vmin;
-        border: ridge;
-        border-width: thick;
-        display: inline-block;
         -webkit-user-select: none;
     }
     .showWinLose {
@@ -119,18 +110,15 @@
     .button {
         position: fixed;
         top: 120vmin;
-        left: 44vw;
+        width: 10vmin;
+        left: 45vw;
         -webkit-user-select: none;
-        background-color: rgb(167, 237, 106);
-        border: solid;
-        border-radius: 5px;
-        font-size: 6vmin;
     }
 
     .choice {
         position: fixed;
         width: 100vw;
-        top: 120vmin;
+        top: 116vmin;
         left: 0;
         text-align: center;
         -webkit-user-select: none;
@@ -141,11 +129,6 @@
         height: 15vmin;
         text-align: center;
         line-height: 15vmin;
-        padding: 0;
-        font-size: 8vmin;
-        border: ridge;
-        border-width: thick;
-        display: inline-block;
         -webkit-user-select: none;
     }
     .showWinLose {
@@ -189,6 +172,8 @@
         left: 0;
         width: 100vw;
         height: 100vh;
+        margin: 0;
+        padding: 0;
     }
 
     .App {
@@ -205,12 +190,9 @@
     .button {
         position: fixed;
         top: 120vmin;
-        left: 44vw;
+        left: 38vw;
+        width: 24vmin;
         -webkit-user-select: none;
-        background-color: rgb(167, 237, 106);
-        border: solid;
-        border-radius: 5px;
-        font-size: 6vmin;
     }
 
     .choice {
@@ -223,15 +205,10 @@
     }
 
     .marubatsu {
-        width: 15vmin;
-        height: 15vmin;
+        width: 20vmin;
+        height: 20vmin;
         text-align: center;
         line-height: 15vmin;
-        padding: 0;
-        font-size: 8vmin;
-        border: ridge;
-        border-width: thick;
-        display: inline-block;
         -webkit-user-select: none;
     }
     .showWinLose {

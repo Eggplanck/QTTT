@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import * as tf from '@tensorflow/tfjs';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 
 let ESRLmodel;
@@ -781,10 +783,10 @@ class App extends Component {
                 </tbody>
             </table>
             <div className="turndisplay">turn: {this.turn}</div>
-            <div className="button" style={this.state.buttonBisible} onClick={this.addTurn}>確定</div>
-            <div className='choice' style={this.state.choiceBisible}>
-                {this.state.choices.map((value,key)=>(<div className='marubatsu' key={key} data-turn={value} onClick={(e)=>this.decideBlock(e.target.dataset.turn)}>{value%2 === 1 ? '〇'+value : '✖'+value}</div>))}
-            </div>
+            <Button variant='contained' color='default' size='large' className="button" style={this.state.buttonBisible} onClick={this.addTurn}>確定</Button>
+            <ButtonGroup className='choice' style={this.state.choiceBisible}>
+                {this.state.choices.map((value,key)=>(<Button variant='contained' size='medium' className='marubatsu' key={key} data-turn={value} onClick={(event)=>this.decideBlock(event.currentTarget.dataset.turn)}>{value%2 === 1 ? '〇'+value : '✖'+value}</Button>))}
+            </ButtonGroup>
         </div>)
     }
 }
