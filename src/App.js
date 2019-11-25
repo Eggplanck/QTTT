@@ -682,6 +682,7 @@ class App extends Component {
             [],
             []
         ]
+        this.decidedPos = [0,0,0,0,0,0,0,0,0]
         this.stonePosForWinLose = [[undefined,undefined,undefined],[undefined,undefined,undefined],[undefined,undefined,undefined]]
         this.setState({
             turn: 1,
@@ -856,7 +857,7 @@ function ESRL(App) {
                     selectable.push(turnCheck)
                 }
             }
-            if(selectable.indexOf(choice) === -1) {
+            if(selectable.indexOf(choice) === -1 || choiceIndex < 36) {
                 choice = selectable[Math.floor(Math.random()*selectable.length)]
             }
         }else {
@@ -866,14 +867,22 @@ function ESRL(App) {
                     selectable.push(i)
                 }
             }
-            for(let cci of choice){
-                if(selectable.indexOf(cci) === -1) {
-                    let sai = Math.floor(Math.random()*selectable.length)
-                    let choice1 = selectable[sai]
-                    selectable.splice(sai,1)
-                    let choice2 = selectable[Math.floor(Math.random()*selectable.length)]
-                    choice = [choice1,choice2]
-                    break
+            if(choiceIndex >= 36){
+                let sai = Math.floor(Math.random()*selectable.length)
+                let choice1 = selectable[sai]
+                selectable.splice(sai,1)
+                let choice2 = selectable[Math.floor(Math.random()*selectable.length)]
+                choice = [choice1,choice2]
+            }else{
+                for(let cci of choice){
+                    if(selectable.indexOf(cci) === -1) {
+                        let sai = Math.floor(Math.random()*selectable.length)
+                        let choice1 = selectable[sai]
+                        selectable.splice(sai,1)
+                        let choice2 = selectable[Math.floor(Math.random()*selectable.length)]
+                        choice = [choice1,choice2]
+                        break
+                    }
                 }
             }
         }
