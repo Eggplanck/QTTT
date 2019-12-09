@@ -817,7 +817,7 @@ function randomCpu(App) {
     }
 }
 function ESRL(App) {
-    if(Math.random()*100 < 90){
+    if(Math.random()*100 < 70){
         let choices = []
         for(let i=0;i<8;i++){
             for(let j=i+1;j<9;j++){
