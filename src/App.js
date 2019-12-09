@@ -841,7 +841,8 @@ function ESRL(App) {
             if(cases[l] === 0) {
                 let virpos = App.stonePos[l]
                 for(let m=0;m<virpos.length;m++) {
-                    case_param[18*l+9+m] = 1
+                    let sturn = virpos[m]
+                    case_param[18*l+9+sturn-1] = 1
                 }
                 cases[l] = 1
             }
