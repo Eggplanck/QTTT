@@ -851,6 +851,7 @@ function ESRL(App) {
         let predicted_value = ESRLmodel.predict(case_param).dataSync()
         let choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
         let choice = choices[choiceIndex]
+        console.log(Math.max.apply(null, predicted_value))
         if(App.turnType === 'entanglement') {
             let selectable = []
             for(let turnCheck of App.stonePos[App.selected[1]]){
