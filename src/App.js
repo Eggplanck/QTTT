@@ -817,7 +817,7 @@ function randomCpu(App) {
     }
 }
 function ESRL(App) {
-    if(Math.random()*100 < 90){
+    if(Math.random()*100 < 100){
         let choices = []
         for(let i=0;i<8;i++){
             for(let j=i+1;j<9;j++){
@@ -851,6 +851,12 @@ function ESRL(App) {
         let predicted_value = ESRLmodel.predict(case_param).dataSync()
         let choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
         let choice = choices[choiceIndex]
+        if(Math.max.apply(null, predicted_value) >= 0){
+            if(Math.random()*100 > 80){
+                console.log('random choice')
+                return randomCpu(App)
+            }
+        }
         console.log(Math.max.apply(null, predicted_value))
         if(App.turnType === 'entanglement') {
             let selectable = []
