@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a34fa5a8d10f98a2b0c4549ecb29c741",
+    "revision": "ddfae35ed654744d66e5235c00fd7ba8",
     "url": "/QTTT/index.html"
   },
   {
-    "revision": "bb0008c4c9234d974c13",
+    "revision": "f747784a36c3f797b219",
     "url": "/QTTT/static/css/main.0b7f6582.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/QTTT/static/js/2.8f3cadfc.chunk.js"
   },
   {
-    "revision": "bb0008c4c9234d974c13",
-    "url": "/QTTT/static/js/main.c0bdea04.chunk.js"
+    "revision": "f747784a36c3f797b219",
+    "url": "/QTTT/static/js/main.9d725fa0.chunk.js"
   },
   {
     "revision": "d2ff8a8bbaba9dae5db0",
