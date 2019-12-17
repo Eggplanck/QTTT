@@ -784,7 +784,7 @@ class App extends Component {
                 </tbody>
             </table>
             <div className="turndisplay">turn: {this.turn}</div>
-            <Button variant='contained' color='default' size='large' className="button" style={this.state.buttonBisible} onClick={this.addTurn}>確定</Button>
+            <Button variant='contained' color='default' size='large' className="button" style={this.state.buttonBisible} onClick={this.addTurn}>Place</Button>
             <ButtonGroup className='choice' style={this.state.choiceBisible}>
                 {this.state.choices.map((value,key)=>(<Button variant='contained' size='medium' className='marubatsu' key={key} data-turn={value} onClick={(event)=>this.decideBlock(event.currentTarget.dataset.turn)}>{value%2 === 1 ? '〇'+value : '✖'+value}</Button>))}
             </ButtonGroup>
@@ -817,7 +817,7 @@ function randomCpu(App) {
     }
 }
 function ESRL(App) {
-    if(Math.random()*100 < 100){
+    if(Math.random()*100 < 95){
         let choices = []
         for(let i=0;i<8;i++){
             for(let j=i+1;j<9;j++){
@@ -851,12 +851,6 @@ function ESRL(App) {
         let predicted_value = ESRLmodel.predict(case_param).dataSync()
         let choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
         let choice = choices[choiceIndex]
-        if(Math.max.apply(null, predicted_value) >= 0){
-            if(Math.random()*100 > 80){
-                console.log('random choice')
-                return randomCpu(App)
-            }
-        }
         console.log(Math.max.apply(null, predicted_value))
         if(App.turnType === 'entanglement') {
             let selectable = []
@@ -896,6 +890,7 @@ function ESRL(App) {
         }
         return choice
     }else{
+        console.log("random action")
         return randomCpu(App)
     }
 }
