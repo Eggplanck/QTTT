@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cca9dccd1f19c795fae53bb6f3c9d894",
+    "revision": "52b338d9609c6b5073e211f0e35d37c2",
     "url": "/QTTT/index.html"
   },
   {
