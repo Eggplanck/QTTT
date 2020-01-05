@@ -7,7 +7,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 let ESRLmodel;
 async function loadmodel() {
-    ESRLmodel = await tf.loadLayersModel("https://eggplanck.github.io/QTTT/DDQN3/model.json")
+    ESRLmodel = await tf.loadLayersModel("https://eggplanck.github.io/QTTT/DDQN4/model.json")
     await ESRLmodel.summary()
 }
 loadmodel();
