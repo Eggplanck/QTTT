@@ -76,6 +76,41 @@ class Block extends Component {
     }
 }
 
+class InitDisplay extends Component {
+    constructor(props) {
+        super(props);
+        this.clickAction = props.onClick
+        this.state = {
+            style : props.style
+        }
+    }
+    handleClick(mark) {
+        this.clickAction(mark)
+    }
+    componentDidUpdate(prevProps) {
+        if(prevProps !== this.props){
+            this.setState({
+                style : this.props.style
+            })
+        }
+    }
+    render() {
+        return (
+            <div className='InitDisplay' style={this.state.style}>
+                <div className='sengo'>
+                    <p className='mess'>Select Mark and Start</p>
+                    <Button variant='contained' className='sengobutton' size='large' onClick={()=>this.handleClick(0)}>
+                        〇
+                    </Button>
+                    <Button variant='contained' className='sengobutton' size='large' onClick={()=>this.handleClick(1)}>
+                        ✖
+                    </Button>
+                </div>
+            </div>
+        )
+    }
+}
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -90,7 +125,14 @@ class App extends Component {
         this.decideBlock2 = this.decideBlock2.bind(this)
         this.checkWinLose = this.checkWinLose.bind(this)
         this.resetField = this.resetField.bind(this)
+        this.start = this.start.bind(this)
         this.state = {
+            init: {
+                display: 'block'
+            },
+            fieldDisplay : {
+                display: 'none'
+            },
             turn: 1,
             blocks: [
                 {
@@ -140,6 +182,7 @@ class App extends Component {
             choices:[],
             showWinLose:{style:{display:'none'},text:''}
         }
+        this.userMark = 0
         this.turn = 1
         this.turnUser = 0
         this.turnType = 'normal'
@@ -204,6 +247,31 @@ class App extends Component {
             tableContents.push(<tr key={i}>{this.state.blocks.slice(i * 3, i * 3 + 3).map((value, key) => (<Block number={value.number} stones={value.stones} selected={value.selected}  onClick={this.addSelected} key={value.number}/>))}</tr>)
         }
         return tableContents
+    }
+    start(mark) {
+        if (mark === 0) {
+            this.userMark = 0
+            this.setState({
+                init: {
+                    display: 'none'
+                },
+                fieldDisplay: {
+                    display: 'block'
+                }
+            })
+        }
+        if (mark === 1) {
+            this.userMark = 1
+            this.setState({
+                init: {
+                    display: 'none'
+                },
+                fieldDisplay: {
+                    display: 'block'
+                }
+            })
+            this.cpusChoice()
+        }
     }
     addSelected(number) {
         if(this.turnType !== 'normal'){
@@ -285,17 +353,17 @@ class App extends Component {
                     }
                     if(WinLose === -1){
                         this.setState({
-                            showWinLose:{style:{display:'inline-block'},text:'引き分け'}
+                            showWinLose:{style:{display:'inline-block'},text:'DRAW'}
                         })
                     }
-                    if(WinLose === 0){
+                    if(WinLose === this.userMark){
                         this.setState({
-                            showWinLose:{style:{display:'inline-block'},text:'先手の勝ち'}
+                            showWinLose:{style:{display:'inline-block'},text:'YOU WIN'}
                         })
                     }
-                    if(WinLose === 1){
+                    if(WinLose === this.userMark){
                         this.setState({
-                            showWinLose:{style:{display:'inline-block'},text:'後手の勝ち'}
+                            showWinLose:{style:{display:'inline-block'},text:'YOU LOSE'}
                         })
                     }
                 }
@@ -409,19 +477,19 @@ class App extends Component {
                             showWinLose:{style:{display:'inline-block',color:'black'},text:'DRAW'}
                         })
                     }
-                    if(WinLose === 0){
+                    if(WinLose === this.userMark){
                         this.setState({
                             showWinLose:{style:{display:'inline-block',color:'red'},text:'YOU WIN'}
                         })
                     }
-                    if(WinLose === 1){
+                    if(WinLose === this.userMark){
                         this.setState({
                             showWinLose:{style:{display:'inline-block',color:'blue'},text:'YOU LOSE'}
                         })
                     }
                 }
             }
-            if(this.turnUser === 1){
+            if(this.turnUser !== this.userMark){
                 this.cpusChoice()
                 return
             }else {
@@ -432,16 +500,19 @@ class App extends Component {
             this.setState({
                 showWinLose:{style:{display:'inline-block',color:'black'},text:'DRAW'}
             })
+            return
         }
-        if(WinLose === 0){
+        if(WinLose === this.userMark){
             this.setState({
                 showWinLose:{style:{display:'inline-block',color:'red'},text:'YOU WIN'}
             })
+            return
         }
-        if(WinLose === 1){
+        if(WinLose !== this.userMark){
             this.setState({
                 showWinLose:{style:{display:'inline-block',color:'blue'},text:'YOU LOSE'}
             })
+            return
         }
     }
     decideBlock1(first,selected,turn,selectedTurn){
@@ -685,6 +756,12 @@ class App extends Component {
         this.decidedPos = [0,0,0,0,0,0,0,0,0]
         this.stonePosForWinLose = [[undefined,undefined,undefined],[undefined,undefined,undefined],[undefined,undefined,undefined]]
         this.setState({
+            fieldDisplay: {
+                display: 'none'
+            },
+            init: {
+                display: 'block'
+            },
             turn: 1,
             blocks: [
                 {
@@ -775,6 +852,8 @@ class App extends Component {
     }
     render() {
         return (<div className='Field'>
+            <InitDisplay onClick={this.start} style={this.state.init}/>
+            <div style={this.state.fieldDisplay}>
             <div className='showWinLose' style={this.state.showWinLose.style} onClick={this.resetField}>
                 {this.state.showWinLose.text}
             </div>
@@ -788,6 +867,7 @@ class App extends Component {
             <ButtonGroup className='choice' style={this.state.choiceBisible}>
                 {this.state.choices.map((value,key)=>(<Button variant='contained' size='medium' className='marubatsu' key={key} data-turn={value} onClick={(event)=>this.decideBlock(event.currentTarget.dataset.turn)}>{value%2 === 1 ? '〇'+value : '✖'+value}</Button>))}
             </ButtonGroup>
+        </div>
         </div>)
     }
 }
@@ -817,7 +897,7 @@ function randomCpu(App) {
     }
 }
 function ESRL(App) {
-    if(Math.random()*100 < 95){
+    if(Math.random()*100 < 90){
         let choices = []
         for(let i=0;i<8;i++){
             for(let j=i+1;j<9;j++){

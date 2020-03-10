@@ -1,4 +1,25 @@
 @media screen and (min-width: 1024px) {
+    .InitDisplay {
+        top: 0;
+        left: 0;
+        position: fixed;
+        background-color: white;
+        z-index: 20;
+        -webkit-user-select: none;
+        height: 100vh;
+        width: 100vw;
+    }
+    .sengo {
+        position: absolute;
+        top: 10vmin;
+        left: 10vmin;
+        text-align: center;
+        -webkit-user-select: none;
+    }
+    .mess {
+        -webkit-user-select: none;
+        font-size: 5vmin;
+    }
     .Block {
         position: relative;
         border-style: solid;
@@ -72,6 +93,27 @@
     }
 }
 @media screen and (max-width: 1024px) {
+    .InitDisplay {
+        top: 0;
+        left: 0;
+        position: fixed;
+        background-color: white;
+        z-index: 20;
+        -webkit-user-select: none;
+        height: 100vh;
+        width: 100vw;
+    }
+    .sengo {
+        width: 100vw;
+        position: absolute;
+        top: 20vh;
+        text-align: center;
+        -webkit-user-select: none;
+    }
+    .mess {
+        -webkit-user-select: none;
+        font-size: 5vmin;
+    }
     .Block {
         position: relative;
         border-style: solid;
@@ -150,6 +192,27 @@
     }
 }
 @media screen and (max-width: 479px) {
+    .InitDisplay {
+        top: 0;
+        left: 0;
+        position: fixed;
+        background-color: white;
+        z-index: 20;
+        -webkit-user-select: none;
+        height: 100vh;
+        width: 100vw;
+    }
+    .sengo {
+        width: 100vw;
+        position: absolute;
+        top: 20vh;
+        text-align: center;
+        -webkit-user-select: none;
+    }
+    .mess {
+        -webkit-user-select: none;
+        font-size: 7vmin;
+    }
     .Block {
         position: relative;
         border-style: solid;
