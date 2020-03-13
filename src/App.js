@@ -897,7 +897,7 @@ function randomCpu(App) {
     }
 }
 function ESRL(App) {
-    if(Math.random()*100 < 90){
+    if(Math.random()*100 < 100){
         let choices = []
         for(let i=0;i<8;i++){
             for(let j=i+1;j<9;j++){
@@ -929,7 +929,8 @@ function ESRL(App) {
         }
         case_param = tf.tensor([case_param])
         let predicted_value = ESRLmodel.predict(case_param).dataSync()
-        let choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
+        let choiceIndex = weightRandom(predicted_value,400)
+        //let choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
         let choice = choices[choiceIndex]
         console.log(Math.max.apply(null, predicted_value))
         if(App.turnType === 'entanglement') {
@@ -972,6 +973,20 @@ function ESRL(App) {
     }else{
         console.log("random action")
         return randomCpu(App)
+    }
+}
+function weightRandom (weight, base) {
+    const reducer = (accumulator,currentValue) => accumulator + Math.pow(base,currentValue)
+    let summen = weight.reduce(reducer,0)
+    let dice = Math.random() * summen
+    let under = 0
+    let top
+    for(let i=0;i<45;i++){
+        top = under + Math.pow(base,weight[i])
+        if(under<=dice && dice<top) {
+            return i
+        }
+        under = top
     }
 }
 
