@@ -3,6 +3,7 @@ import './App.css';
 import * as tf from '@tensorflow/tfjs';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 let ESRLmodel;
@@ -10,7 +11,6 @@ async function loadmodel() {
     ESRLmodel = await tf.loadLayersModel("https://eggplanck.github.io/QTTT/DDQN4/model.json")
     await ESRLmodel.summary()
 }
-loadmodel();
 
 class Block extends Component {
     constructor(props) {
@@ -127,6 +127,7 @@ class App extends Component {
         this.resetField = this.resetField.bind(this)
         this.start = this.start.bind(this)
         this.state = {
+            loading:true,
             init: {
                 display: 'block'
             },
@@ -240,6 +241,16 @@ class App extends Component {
         ]
         this.decidedPos = [0,0,0,0,0,0,0,0,0]
         this.stonePosForWinLose = [[undefined,undefined,undefined],[undefined,undefined,undefined],[undefined,undefined,undefined]]
+    }
+    componentDidMount(){
+        const loading = async () => {
+            await loadmodel()
+            console.log('loaded')
+            this.setState({
+                loading:false
+            })
+        }
+        loading()
     }
     makeLines() {
         let tableContents = [];
@@ -851,6 +862,14 @@ class App extends Component {
         }
     }
     render() {
+        if(this.state.loading){
+            return (
+                <div className='Field'>
+                    <p style={{textAlign:"center"}}>Loading...</p>
+                    <p style={{textAlign:"center"}}><CircularProgress /></p>
+                </div>
+            )
+        }
         return (<div className='Field'>
             <InitDisplay onClick={this.start} style={this.state.init}/>
             <div style={this.state.fieldDisplay}>
@@ -929,7 +948,13 @@ function ESRL(App) {
         }
         case_param = tf.tensor([case_param])
         let predicted_value = ESRLmodel.predict(case_param).dataSync()
-        let choiceIndex = weightRandom(predicted_value,400)
+        let choiceIndex
+        if(App.turn === 1||App.turn === 2){
+            choiceIndex = weightRandom(predicted_value,400)
+        }else{
+            choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
+        }
+        //let choiceIndex = weightRandom(predicted_value,400)
         //let choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
         let choice = choices[choiceIndex]
         console.log(Math.max.apply(null, predicted_value))
