@@ -949,15 +949,19 @@ function ESRL(App) {
         case_param = tf.tensor([case_param])
         let predicted_value = ESRLmodel.predict(case_param).dataSync()
         let choiceIndex
-        if(App.turn === 1||App.turn === 2){
-            choiceIndex = weightRandom(predicted_value,400)
+        if(App.turn === 1){
+            choiceIndex = weightRandom(predicted_value,100)
+        }else if(App.turn === 2){
+            choiceIndex = weightRandom(predicted_value,1000000)
         }else{
             choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
         }
         //let choiceIndex = weightRandom(predicted_value,400)
         //let choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
         let choice = choices[choiceIndex]
-        console.log(Math.max.apply(null, predicted_value))
+        //console.log(Math.max.apply(null, predicted_value))
+        console.log(predicted_value[choiceIndex])
+        //console.log(predicted_value)
         if(App.turnType === 'entanglement') {
             let selectable = []
             for(let turnCheck of App.stonePos[App.selected[1]]){
@@ -1001,13 +1005,13 @@ function ESRL(App) {
     }
 }
 function weightRandom (weight, base) {
-    const reducer = (accumulator,currentValue) => accumulator + Math.pow(base,currentValue)
+    const reducer = (accumulator,currentValue) => accumulator + Math.pow(base,currentValue) / (Math.pow(base,currentValue) + 1)
     let summen = weight.reduce(reducer,0)
     let dice = Math.random() * summen
     let under = 0
     let top
     for(let i=0;i<45;i++){
-        top = under + Math.pow(base,weight[i])
+        top = under + Math.pow(base,weight[i]) / (Math.pow(base,weight[i]) + 1)
         if(under<=dice && dice<top) {
             return i
         }
