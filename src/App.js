@@ -105,6 +105,7 @@ class InitDisplay extends Component {
                     <Button variant='contained' className='sengobutton' size='large' onClick={()=>this.handleClick(1)}>
                         ✖
                     </Button>
+                    <div style={{marginTop:'20px'}}>To learn rule: <a href='https://ja.wikipedia.org/wiki/%E9%87%8F%E5%AD%90%E4%B8%89%E7%9B%AE%E4%B8%A6%E3%81%B9' target="_blank" rel="noopener noreferrer">Wikipedia「量子三目並べ」</a></div>
                 </div>
             </div>
         )
