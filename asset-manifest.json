@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/QTTT/static/css/main.f4d5a0b1.chunk.css",
+    "main.css": "/QTTT/static/css/main.28ad2012.chunk.css",
     "main.js": "/QTTT/static/js/main.17b5f873.chunk.js",
     "main.js.map": "/QTTT/static/js/main.17b5f873.chunk.js.map",
     "runtime~main.js": "/QTTT/static/js/runtime~main.64642d3c.js",
@@ -8,8 +8,8 @@
     "static/js/2.e47cd4ea.chunk.js": "/QTTT/static/js/2.e47cd4ea.chunk.js",
     "static/js/2.e47cd4ea.chunk.js.map": "/QTTT/static/js/2.e47cd4ea.chunk.js.map",
     "index.html": "/QTTT/index.html",
-    "precache-manifest.aaabee0067143d089ce05f3de0bbd9f6.js": "/QTTT/precache-manifest.aaabee0067143d089ce05f3de0bbd9f6.js",
+    "precache-manifest.35d2488300d81da0482fbb612976040b.js": "/QTTT/precache-manifest.35d2488300d81da0482fbb612976040b.js",
     "service-worker.js": "/QTTT/service-worker.js",
-    "static/css/main.f4d5a0b1.chunk.css.map": "/QTTT/static/css/main.f4d5a0b1.chunk.css.map"
+    "static/css/main.28ad2012.chunk.css.map": "/QTTT/static/css/main.28ad2012.chunk.css.map"
   }
 }
