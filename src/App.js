@@ -106,7 +106,12 @@ class InitDisplay extends Component {
                     <Button variant='contained' className='sengobutton' size='large' onClick={()=>this.handleClick(1)}>
                         ✖
                     </Button>
-                    <div className='tolearn'>To learn the rule: <a href='https://ja.wikipedia.org/wiki/%E9%87%8F%E5%AD%90%E4%B8%89%E7%9B%AE%E4%B8%A6%E3%81%B9' target="_blank" rel="noopener noreferrer">Wikipedia「量子三目並べ」</a></div>
+                    <div className='explain'>
+                    Quantum Tic-Tac-Toe is a quantum expansion of Tic-Tac-Toe.<br/>
+                    You play against AI player made by Deep Q-Network (DQN), which is one of the methods of Deep reinforcement learning.<br/>
+                    Can you defeat AI?
+                    </div>
+                    <div className='tolearn'>To learn the rule: <a href='https://en.wikipedia.org/w/index.php?title=Quantum_tic-tac-toe&oldid=1014709105' target="_blank" rel="noopener noreferrer">Wikipedia "Quantum tic-tac-toe" </a></div>
                 </div>
             </div>
         )
@@ -127,6 +132,7 @@ class App extends Component {
         this.decideBlock2 = this.decideBlock2.bind(this)
         this.checkWinLose = this.checkWinLose.bind(this)
         this.resetField = this.resetField.bind(this)
+        this.clearShowEntangle = this.clearShowEntangle.bind(this)
         this.start = this.start.bind(this)
         this.state = {
             loading:true,
@@ -183,7 +189,8 @@ class App extends Component {
                 display: 'none'
             },
             choices:[],
-            showWinLose:{style:{display:'none'},text:''}
+            showWinLose:{style:{display:'none'},text:''},
+            showEntangle:{style:{display:'none'}}
         }
         this.userMark = 0
         this.turn = 1
@@ -325,7 +332,9 @@ class App extends Component {
             this.stonePos[this.selected[1]].push(this.turn)
 
             if (this.checkEntanglement(this.selected[1], this.selected[1], this.turn)) {
-                alert('cyclic entanglement')
+                this.setState({
+                    showEntangle:{style:{display:'inline-block'}}
+                })
                 this.turnType = 'entanglement'
                 this.selected.sort(function(a,b){
                     if(a < b) return -1;
@@ -361,23 +370,26 @@ class App extends Component {
                         blocks:this.blocks
                     })
                     let WinLose = this.checkWinLose()
-                    if(WinLose === -1 && this.turn !== 10){
-                        return
-                    }
                     if(WinLose === -1){
                         this.setState({
-                            showWinLose:{style:{display:'inline-block'},text:'DRAW'}
+                            showWinLose:{style:{display:'inline-block'},text:'DRAW'},
+                            showEntangle:{style:{display:'none'}}
                         })
+                        return
                     }
                     if(WinLose === this.userMark){
                         this.setState({
-                            showWinLose:{style:{display:'inline-block'},text:'YOU WIN'}
+                            showWinLose:{style:{display:'inline-block'},text:'YOU WIN'},
+                            showEntangle:{style:{display:'none'}}
                         })
+                        return
                     }
                     if(WinLose === this.userMark){
                         this.setState({
-                            showWinLose:{style:{display:'inline-block'},text:'YOU LOSE'}
+                            showWinLose:{style:{display:'inline-block'},text:'YOU LOSE'},
+                            showEntangle:{style:{display:'none'}}
                         })
+                        return
                     }
                 }
             }
@@ -487,18 +499,24 @@ class App extends Component {
                     let WinLose = this.checkWinLose()
                     if(WinLose === -1){
                         this.setState({
-                            showWinLose:{style:{display:'inline-block',color:'black'},text:'DRAW'}
+                            showWinLose:{style:{display:'inline-block',color:'black'},text:'DRAW'},
+                            showEntangle:{style:{display:'none'}}
                         })
+                        return
                     }
                     if(WinLose === this.userMark){
                         this.setState({
-                            showWinLose:{style:{display:'inline-block',color:'red'},text:'YOU WIN'}
+                            showWinLose:{style:{display:'inline-block',color:'red'},text:'YOU WIN'},
+                            showEntangle:{style:{display:'none'}}
                         })
+                        return
                     }
                     if(WinLose === this.userMark){
                         this.setState({
-                            showWinLose:{style:{display:'inline-block',color:'blue'},text:'YOU LOSE'}
+                            showWinLose:{style:{display:'inline-block',color:'blue'},text:'YOU LOSE'},
+                            showEntangle:{style:{display:'none'}}
                         })
+                        return
                     }
                 }
             }
@@ -511,19 +529,22 @@ class App extends Component {
         }
         if(WinLose === -1){
             this.setState({
-                showWinLose:{style:{display:'inline-block',color:'black'},text:'DRAW'}
+                showWinLose:{style:{display:'inline-block',color:'black'},text:'DRAW'},
+                showEntangle:{style:{display:'none'}}
             })
             return
         }
         if(WinLose === this.userMark){
             this.setState({
-                showWinLose:{style:{display:'inline-block',color:'red'},text:'YOU WIN'}
+                showWinLose:{style:{display:'inline-block',color:'red'},text:'YOU WIN'},
+                showEntangle:{style:{display:'none'}}
             })
             return
         }
         if(WinLose !== this.userMark){
             this.setState({
-                showWinLose:{style:{display:'inline-block',color:'blue'},text:'YOU LOSE'}
+                showWinLose:{style:{display:'inline-block',color:'blue'},text:'YOU LOSE'},
+                showEntangle:{style:{display:'none'}}
             })
             return
         }
@@ -822,7 +843,13 @@ class App extends Component {
                 display: 'none'
             },
             choices:[],
-            showWinLose:{style:{display:'none'},text:''}
+            showWinLose:{style:{display:'none'},text:''},
+            showEntangle:{style:{display:'none'}}
+        })
+    }
+    clearShowEntangle(){
+        this.setState({
+            showEntangle:{style:{display:'none'}}
         })
     }
     cpusChoice(){
@@ -846,7 +873,9 @@ class App extends Component {
                 this.stonePos[this.selected[1]].push(this.turn)
 
                 if (this.checkEntanglement(this.selected[1], this.selected[1], this.turn)) {
-                    alert('cyclic entanglement')
+                    this.setState({
+                        showEntangle:{style:{display:'inline-block'}}
+                    })
                     this.turnType = 'entanglement'
                     this.choiceAction()
                     return
@@ -877,6 +906,9 @@ class App extends Component {
             <div style={this.state.fieldDisplay}>
             <div className='showWinLose' style={this.state.showWinLose.style} onClick={this.resetField}>
                 {this.state.showWinLose.text}
+            </div>
+            <div className='showEntangle' style={this.state.showEntangle.style} onClick={this.clearShowEntangle}>
+                Cyclic Entangle!
             </div>
             <table className="App">
                 <tbody>
@@ -918,7 +950,7 @@ function randomCpu(App) {
     }
 }
 function ESRL(App) {
-    if(Math.random()*100 < 100){
+    if(Math.random()*100 < 100){//randomにする確率の調整
         let choices = []
         for(let i=0;i<8;i++){
             for(let j=i+1;j<9;j++){
@@ -952,9 +984,9 @@ function ESRL(App) {
         let predicted_value = ESRLmodel.predict(case_param).dataSync()
         let choiceIndex
         if(App.turn === 1){
-            choiceIndex = weightRandom(predicted_value,100)
+            choiceIndex = weightRandom(predicted_value,10)
         }else if(App.turn === 2){
-            choiceIndex = weightRandom(predicted_value,100000)
+            choiceIndex = weightRandom(predicted_value,10)
         }else{
             choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
         }
@@ -1006,14 +1038,14 @@ function ESRL(App) {
         return randomCpu(App)
     }
 }
-function weightRandom (weight, base) {
-    const reducer = (accumulator,currentValue) => accumulator + Math.pow(base,currentValue) / (Math.pow(base,currentValue) + 1)
+function weightRandom (weight, t) {
+    const reducer = (accumulator,currentValue) => accumulator + Math.pow(2,currentValue/t)
     let summen = weight.reduce(reducer,0)
     let dice = Math.random() * summen
     let under = 0
     let top
     for(let i=0;i<45;i++){
-        top = under + Math.pow(base,weight[i]) / (Math.pow(base,weight[i]) + 1)
+        top = under + Math.pow(2,weight[i]/t)
         if(under<=dice && dice<top) {
             return i
         }
