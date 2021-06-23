@@ -986,7 +986,7 @@ function ESRL(App) {
         if(App.turn === 1){
             choiceIndex = weightRandom(predicted_value,0.1)
         }else if(App.turn === 2){
-            choiceIndex = weightRandom(predicted_value,0.02)
+            choiceIndex = weightRandom(predicted_value,0.01)
         }else{
             choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
         }
