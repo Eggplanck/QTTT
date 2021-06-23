@@ -984,9 +984,9 @@ function ESRL(App) {
         let predicted_value = ESRLmodel.predict(case_param).dataSync()
         let choiceIndex
         if(App.turn === 1){
-            choiceIndex = weightRandom(predicted_value,10)
+            choiceIndex = weightRandom(predicted_value,0.1)
         }else if(App.turn === 2){
-            choiceIndex = weightRandom(predicted_value,10)
+            choiceIndex = weightRandom(predicted_value,0.02)
         }else{
             choiceIndex = predicted_value.indexOf(Math.max.apply(null, predicted_value))
         }
