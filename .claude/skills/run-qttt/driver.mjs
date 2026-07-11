@@ -42,8 +42,8 @@ async function launch() {
   const page = await browser.newPage({ viewport: { width: 1280, height: 960 } });
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
-  // React dev build logs warnings via console.error; the app ships one
-  // pre-existing benign one (validateDOMNesting: CircularProgress in <p>).
+  // React dev builds log warnings via console.error; treat only real
+  // errors as failures.
   page.on('console', (m) => {
     if (m.type() === 'error' && !m.text().startsWith('Warning:')) errors.push(m.text());
   });

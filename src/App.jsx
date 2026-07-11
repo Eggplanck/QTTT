@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 import * as tf from '@tensorflow/tfjs';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 let ESRLmodel;
@@ -897,7 +897,7 @@ class App extends Component {
             return (
                 <div className='Field'>
                     <p style={{textAlign:"center"}}>Loading...</p>
-                    <p style={{textAlign:"center"}}><CircularProgress /></p>
+                    <div style={{textAlign:"center"}}><CircularProgress /></div>
                 </div>
             )
         }
@@ -916,7 +916,7 @@ class App extends Component {
                 </tbody>
             </table>
             <div className="turndisplay">turn: {this.turn}</div>
-            <Button variant='contained' color='default' size='large' className="button" style={this.state.buttonBisible} onClick={this.addTurn}>Place</Button>
+            <Button variant='contained' color='inherit' size='large' className="button" style={this.state.buttonBisible} onClick={this.addTurn}>Place</Button>
             <ButtonGroup className='choice' style={this.state.choiceBisible}>
                 {this.state.choices.map((value,key)=>(<Button variant='contained' size='medium' className='marubatsu' key={key} data-turn={value} onClick={(event)=>this.decideBlock(event.currentTarget.dataset.turn)}>{value%2 === 1 ? '〇'+value : '✖'+value}</Button>))}
             </ButtonGroup>
