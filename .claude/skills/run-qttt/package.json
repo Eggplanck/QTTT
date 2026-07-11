@@ -1,8 +1,0 @@
-{
-  "name": "run-qttt-driver",
-  "private": true,
-  "description": "Playwright driver for the QTTT run skill (see SKILL.md)",
-  "dependencies": {
-    "playwright": "^1.61.1"
-  }
-}
